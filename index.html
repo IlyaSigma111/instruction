@@ -3,298 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ИльяКласс | Премиум инструкция</title>
+    <title>ИльяКласс | Платформа викторин</title>
     <style>
-        /* ========== RESET & GLOBAL ========== */
+        /* ===== ОСНОВНЫЕ СБРОСЫ ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
-        /* ========== СЛОЖНЫЙ ГРАДИЕНТНЫЙ ФОН ========== */
+        /* ===== ГЛУБОКИЙ ФОН С ПОДЛОЖКОЙ ===== */
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at 0% 0%, #1e3a5f, #0a1a2f 40%, #030b14 100%);
+            background: linear-gradient(145deg, #0c1c2e 0%, #1a3347 50%, #0d2640 100%);
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Анимированные частицы фона */
+        /* АНИМИРОВАННЫЙ ФОН (ЭФФЕКТ ДВИЖЕНИЯ) */
         body::before {
             content: '';
             position: fixed;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(100, 180, 255, 0.15) 0%, transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(255, 200, 100, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 40% 80%, rgba(150, 100, 255, 0.1) 0%, transparent 35%),
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(100, 180, 255, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(255, 200, 120, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 30% 80%, rgba(170, 130, 255, 0.1) 0%, transparent 35%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 12px);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* ========== ГЛАВНЫЙ КОНТЕЙНЕР ========== */
-        .premium-glass {
+        /* ОСНОВНОЙ СТЕКЛЯННЫЙ КОНТЕЙНЕР */
+        .glass-master {
             position: relative;
             width: 100vw;
             height: 100vh;
-            background: rgba(5, 15, 25, 0.4);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            background: rgba(8, 18, 28, 0.35);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
             border: none;
             display: flex;
             flex-direction: column;
-            padding: 30px 35px;
-            z-index: 2;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            padding: 25px 30px;
+            z-index: 5;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
         }
 
-        /* ========== ВЕРХНЯЯ ПАНЕЛЬ С ГРАДИЕНТОМ ========== */
-        .top-bar-premium {
+        /* БЛИКИ НА СТЕКЛЕ (ВЕРХНИЙ ЛЕВЫЙ УГОЛ) */
+        .glass-master::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+            filter: blur(30px);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 0 0 50% 0;
+        }
+
+        /* БЛИКИ НА СТЕКЛЕ (ПРАВЫЙ НИЖНИЙ УГОЛ) */
+        .glass-master::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle at 70% 80%, rgba(255, 220, 150, 0.2) 0%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50% 0 0 0;
+        }
+
+        /* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
+        .top-panel {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px 25px 20px;
-            border-bottom: 1px solid rgba(255, 215, 150, 0.2);
-            margin-bottom: 15px;
+            padding: 0 20px 20px 20px;
             position: relative;
+            z-index: 10;
         }
 
-        .top-bar-premium::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 20%;
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 200, 100, 0.5), rgba(255, 150, 50, 0.8), rgba(255, 200, 100, 0.5), transparent);
-            filter: blur(1px);
-        }
-
-        .title-premium h2 {
-            font-size: 18px;
+        .title-block h2 {
+            font-size: 16px;
             font-weight: 400;
-            letter-spacing: 5px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #b9d9ff, #ffcf9a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.6);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        .title-premium h1 {
-            font-size: 48px;
+        .title-block h1 {
+            font-size: 44px;
             font-weight: 700;
-            background: linear-gradient(145deg, #ffffff, #ffe7b6);
+            background: linear-gradient(145deg, #ffffff, #ffecbf);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 200, 50, 0.3);
+            text-shadow: 0 0 20px rgba(255, 200, 80, 0.5);
             letter-spacing: -0.5px;
             margin-top: 5px;
         }
 
-        .counter-premium {
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(16px);
-            padding: 14px 38px;
-            border-radius: 70px;
+        .slide-counter {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            padding: 12px 36px;
+            border-radius: 60px;
             border: 1px solid rgba(255, 215, 120, 0.4);
             font-size: 24px;
-            font-weight: 600;
-            color: #fff7e6;
-            box-shadow: 0 15px 30px -10px black, inset 0 1px 3px rgba(255,255,255,0.3);
-            letter-spacing: 2px;
+            font-weight: 500;
+            color: #fff5e0;
+            box-shadow: 0 10px 25px -10px black, inset 0 1px 3px rgba(255,255,255,0.2);
+            z-index: 20;
+            position: relative;
         }
 
-        /* ========== ОСНОВНАЯ ОБЛАСТЬ СЛАЙДА ========== */
-        .slide-area-premium {
+        /* ===== ОСНОВНАЯ ОБЛАСТЬ КОНТЕНТА ===== */
+        .content-area {
             flex: 1;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 50px 60px;
-            margin: 0 15px 25px 15px;
+            border-radius: 55px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 45px 60px;
+            margin: 0 15px 20px 15px;
             overflow-y: auto;
             box-shadow: 
-                0 30px 60px -20px black,
-                inset 0 0 30px rgba(255, 215, 150, 0.1),
-                inset 0 2px 5px rgba(255,255,255,0.1);
+                0 30px 60px -25px black,
+                inset 0 0 50px rgba(255, 215, 150, 0.1),
+                inset 0 2px 8px rgba(255,255,255,0.1);
             color: #f0f7ff;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255, 200, 100, 0.6) rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
+            scrollbar-color: #ffb86b rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 10;
         }
 
-        .slide-area-premium::-webkit-scrollbar {
+        /* Стилизация скролла */
+        .content-area::-webkit-scrollbar {
             width: 12px;
         }
-        .slide-area-premium::-webkit-scrollbar-track {
+        .content-area::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.03);
-            border-radius: 15px;
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        .slide-area-premium::-webkit-scrollbar-thumb {
-            background: linear-gradient(145deg, #ffaa33, #ff8c1a);
-            border-radius: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: inset 0 0 10px rgba(255,255,150,0.5);
+        .content-area::-webkit-scrollbar-thumb {
+            background: linear-gradient(145deg, #ffaa33, #ff881a);
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.15);
         }
 
-        /* ========== СЛАЙДЫ С АНИМАЦИЕЙ ========== */
-        .slide-premium {
+        /* ===== СЛАЙДЫ ===== */
+        .slide {
             display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s ease;
+            animation: glassReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .slide-premium.active {
+        .slide.active {
             display: block;
-            animation: premiumFade 0.6s forwards;
         }
-        @keyframes premiumFade {
-            0% { opacity: 0; transform: translateY(25px) scale(0.98); }
+        @keyframes glassReveal {
+            0% { opacity: 0; transform: translateY(20px) scale(0.98); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* ========== ТИПОГРАФИКА ========== */
+        /* Типографика */
         h3 {
-            font-size: 44px;
+            font-size: 42px;
             font-weight: 600;
             margin-bottom: 35px;
             border-left: 10px solid #ffb347;
             padding-left: 30px;
-            background: linear-gradient(145deg, #ffffff, #ffdeb0);
+            background: linear-gradient(145deg, #ffffff, #ffe4b5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 180, 60, 0.3);
-            letter-spacing: -0.5px;
+            text-shadow: 0 0 20px rgba(255, 180, 60, 0.4);
         }
 
         h4 {
-            font-size: 32px;
-            margin: 45px 0 25px 0;
+            font-size: 30px;
+            margin: 45px 0 25px;
             color: #ffdb9f;
             font-weight: 500;
-            text-shadow: 0 2px 10px rgba(255, 140, 0, 0.3);
-            border-bottom: 1px dashed rgba(255, 200, 100, 0.4);
+            border-bottom: 1px solid rgba(255, 200, 100, 0.3);
             padding-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         p {
             font-size: 24px;
             line-height: 1.7;
             margin-bottom: 25px;
-            color: #e6f0ff;
-            font-weight: 350;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 300;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
-        /* ========== ПРЕМИУМ КАРТОЧКИ ========== */
-        .premium-card {
+        /* Стеклянные карточки */
+        .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 60px;
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border-radius: 55px;
             padding: 40px 45px;
-            margin: 40px 0;
+            margin: 35px 0;
             border: 1px solid rgba(255, 215, 120, 0.25);
             box-shadow: 
                 0 30px 50px -25px black,
-                inset 0 1px 5px rgba(255,255,255,0.2),
-                0 0 0 2px rgba(255, 200, 100, 0.1);
-            transition: 0.3s;
-        }
-        .premium-card:hover {
-            border-color: rgba(255, 200, 100, 0.5);
-            box-shadow: 0 35px 60px -25px black, 0 0 0 3px rgba(255, 180, 60, 0.2);
+                inset 0 0 30px rgba(255, 200, 100, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .link-title-premium {
-            font-size: 20px;
-            text-transform: uppercase;
-            color: #ffc285;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-            font-weight: 300;
+        /* Блик на карточке */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15) 0%, transparent 60%);
+            opacity: 0.4;
+            pointer-events: none;
         }
 
-        .link-url-premium {
-            font-size: 36px;
+        .link-url {
+            font-size: 34px;
             font-weight: 600;
             word-break: break-all;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px 30px;
-            border-radius: 40px;
-            margin: 20px 0;
-            border: 2px solid #ffb347;
-            color: #b3e0ff;
-            font-family: 'Fira Code', monospace;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5), 0 0 20px rgba(255, 160, 0, 0.3);
-        }
-
-        /* ========== СЕТКА С ПРЕМИУМ ЭФФЕКТАМИ ========== */
-        .premium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 45px 0;
-        }
-
-        .premium-grid-item {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.35);
+            padding: 22px 32px;
             border-radius: 45px;
-            padding: 35px;
+            margin: 25px 0;
+            border: 2px solid #ffb347;
+            color: #c4e2ff;
+            font-family: 'Fira Code', monospace;
+            box-shadow: inset 0 2px 12px rgba(0,0,0,0.6), 0 0 30px rgba(255, 160, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Сетка информации */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .info-item {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 45px;
+            padding: 32px;
             box-shadow: 0 20px 35px -15px black;
             transition: 0.25s;
         }
-        .premium-grid-item:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(255, 200, 100, 0.4);
-            background: rgba(255, 255, 255, 0.05);
+        .info-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,200,100,0.4);
+            background: rgba(255,255,255,0.04);
         }
-        .premium-grid-item strong {
+        .info-item strong {
             display: block;
-            font-size: 30px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 18px;
             color: #ffbf6b;
         }
-        .premium-grid-item span {
+        .info-item span {
             font-size: 22px;
-            color: #d4e4ff;
+            color: #e0ecff;
         }
 
-        /* ========== СПИСОК ШАГОВ С ГЛЯНЦЕМ ========== */
-        .step-list-premium {
+        /* Список шагов */
+        .step-list {
             list-style: none;
         }
-        .step-list-premium li {
+        .step-list li {
             display: flex;
             align-items: center;
             gap: 35px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            padding: 25px 40px;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(15px);
+            padding: 25px 45px;
             border-radius: 70px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 25px;
             font-size: 26px;
             transition: 0.2s;
-            box-shadow: 0 15px 30px -15px black;
         }
-        .step-list-premium li:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 180, 70, 0.5);
+        .step-list li:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,180,70,0.5);
         }
-        .step-number-premium {
-            background: radial-gradient(circle at 30% 20%, #ffc107, #ff8c1a);
-            color: #0a1a2a;
+        .step-num {
+            background: linear-gradient(145deg, #ffb347, #ff8c1a);
+            color: #0f1f2f;
             width: 80px;
             height: 80px;
             display: flex;
@@ -303,58 +318,73 @@
             border-radius: 50%;
             font-weight: 800;
             font-size: 38px;
-            box-shadow: 0 12px 0 #b25c00, 0 10px 30px #ffaa33;
+            box-shadow: 0 12px 0 #b25c00, 0 8px 25px #ffaa33;
             border: 3px solid #ffe49e;
             flex-shrink: 0;
         }
 
-        /* ========== ТЕКСТОВЫЕ БЛОКИ ШАГОВ (ИЗ TUTORIAL) ========== */
-        .step-description-premium {
+        /* Текстовые блоки шагов (из tutorial) */
+        .step-text {
             background: rgba(0, 20, 35, 0.6);
-            backdrop-filter: blur(16px);
-            padding: 30px 40px;
+            backdrop-filter: blur(20px);
+            padding: 30px 45px;
             border-radius: 50px;
             border-left: 10px solid #ffaa33;
             margin: 30px 0;
             font-size: 24px;
-            border: 1px solid rgba(255, 200, 100, 0.3);
-            box-shadow: 0 20px 40px -15px black;
+            border: 1px solid rgba(255,200,100,0.3);
+            box-shadow: 0 20px 40px -20px black;
             color: #f0f8ff;
         }
 
-        /* ========== ПАНЕЛИ УЧИТЕЛЯ/УЧЕНИКА В СТИЛЕ ГЛАСС ========== */
-        .glass-panel-row {
+        /* Панели учителя/ученика */
+        .panel-row {
             display: flex;
-            gap: 40px;
+            gap: 35px;
             margin: 40px 0;
             flex-wrap: wrap;
         }
-        .glass-panel {
-            flex: 1 1 320px;
-            background: rgba(0, 30, 50, 0.4);
-            backdrop-filter: blur(25px);
+        .panel {
+            flex: 1 1 300px;
+            background: rgba(5, 25, 40, 0.5);
+            backdrop-filter: blur(30px);
             border-radius: 50px;
             padding: 35px;
-            border: 1px solid rgba(255, 215, 120, 0.3);
+            border: 1px solid rgba(255,215,120,0.3);
             box-shadow: 0 30px 45px -20px black;
+            position: relative;
+            overflow: hidden;
+        }
+        .panel::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -20%;
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(255,230,150,0.15) 0%, transparent 70%);
+            filter: blur(30px);
+            pointer-events: none;
         }
         .panel-label {
             font-size: 26px;
             font-weight: 600;
-            background: rgba(255, 215, 120, 0.15);
+            background: rgba(255,215,120,0.15);
             display: inline-block;
             padding: 12px 35px;
             border-radius: 60px;
             margin-bottom: 30px;
             color: #ffdcaa;
-            border: 1px solid rgba(255, 200, 100, 0.4);
+            border: 1px solid rgba(255,200,100,0.4);
             backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 2;
         }
-        .glass-code {
-            background: rgba(0, 0, 0, 0.4);
+        .code-display {
+            background: rgba(0,0,0,0.5);
             padding: 20px;
-            border-radius: 40px;
-            font-size: 42px;
+            border-radius: 45px;
+            font-size: 44px;
             font-weight: bold;
             letter-spacing: 12px;
             text-align: center;
@@ -367,40 +397,40 @@
             display: flex;
             justify-content: space-between;
             background: rgba(255,255,255,0.05);
-            padding: 18px 25px;
+            padding: 18px 30px;
             border-radius: 50px;
             margin: 15px 0;
             border: 1px solid rgba(255,255,255,0.1);
             font-size: 24px;
         }
-        .question-block {
-            background: rgba(0, 0, 0, 0.3);
+        .question-box {
+            background: rgba(0,0,0,0.4);
             padding: 30px;
             border-radius: 45px;
-            border: 1px solid rgba(255, 180, 60, 0.4);
+            border: 1px solid rgba(255,180,60,0.4);
             font-size: 26px;
         }
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 30px 0;
+            margin: 25px 0;
         }
-        .option-item {
+        .option {
             background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 50px;
+            padding: 18px;
+            border-radius: 45px;
             text-align: center;
             font-size: 24px;
             border: 1px solid rgba(255,255,255,0.15);
         }
-        .option-item.correct {
-            background: rgba(50, 180, 80, 0.4);
+        .option.correct {
+            background: rgba(50, 170, 80, 0.5);
             border-color: #9bff9b;
-            box-shadow: 0 0 30px #7aff7a;
+            box-shadow: 0 0 30px #8aff8a;
         }
-        .stats-premium {
-            background: rgba(0, 0, 0, 0.3);
+        .stats-table {
+            background: rgba(0,0,0,0.3);
             padding: 25px;
             border-radius: 40px;
             font-size: 22px;
@@ -412,241 +442,238 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* ========== СТРЕЛКИ В НИЖНИХ УГЛАХ (МЕГА-БОЛЬШИЕ) ========== */
-        .nav-corner-left, .nav-corner-right {
+        /* ===== СТРЕЛКИ В НИЖНИХ УГЛАХ ===== */
+        .arrow-left, .arrow-right {
             position: absolute;
             bottom: 35px;
-            z-index: 200;
+            z-index: 100;
         }
-        .nav-corner-left {
+        .arrow-left {
             left: 35px;
         }
-        .nav-corner-right {
+        .arrow-right {
             right: 35px;
         }
-        .nav-arrow-premium {
-            background: rgba(20, 40, 60, 0.45);
-            backdrop-filter: blur(30px);
+        .nav-arrow {
+            background: rgba(20, 40, 55, 0.5);
+            backdrop-filter: blur(35px);
             border: 3px solid rgba(255, 215, 120, 0.7);
             color: white;
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            font-size: 85px;
+            font-size: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             box-shadow: 
                 0 30px 45px -10px black,
-                0 0 0 3px rgba(255, 200, 100, 0.3),
-                inset 0 0 30px rgba(255, 200, 0, 0.2);
+                0 0 0 3px rgba(255, 200, 100, 0.2),
+                inset 0 0 30px rgba(255, 215, 0, 0.2);
             transition: 0.2s;
             user-select: none;
         }
-        .nav-arrow-premium:hover {
-            background: rgba(255, 170, 60, 0.3);
-            transform: scale(1.08) rotate(2deg);
+        .nav-arrow:hover {
+            background: rgba(255, 170, 70, 0.3);
+            transform: scale(1.1);
             border-color: #ffcf8a;
             box-shadow: 0 35px 55px -8px black, 0 0 0 5px rgba(255, 180, 50, 0.4);
         }
-        .nav-arrow-premium.disabled {
+        .nav-arrow.disabled {
             opacity: 0.15;
             pointer-events: none;
             border-color: rgba(255,255,255,0.2);
         }
 
-        /* ========== TЕЛЕГРАМ КОНТАКТ ========== */
-        .telegram-premium {
+        /* ===== КНОПКА ПЕРЕХОДА НА ИЛЬЯКЛАСС ===== */
+        .big-redirect-button {
+            display: inline-block;
+            background: linear-gradient(145deg, #ffaa33, #ff881a);
+            color: #0a1f2c;
+            font-size: 32px;
+            font-weight: 700;
+            padding: 25px 60px;
+            border-radius: 80px;
+            text-decoration: none;
+            box-shadow: 0 20px 35px -5px rgba(255, 140, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.3);
+            margin: 40px 0 20px;
+            text-align: center;
+            transition: 0.2s;
+            border: 2px solid #ffdb9f;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .big-redirect-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(145deg, #ffb84d, #ff9922);
+            box-shadow: 0 25px 45px -5px #ff8c1a;
+        }
+
+        /* ===== TЕЛЕГРАМ (В ПРАВОМ ВЕРХНЕМ УГЛУ, НЕ ПЕРЕКРЫВАЕТ) ===== */
+        .telegram-top {
             position: absolute;
             top: 30px;
-            right: 150px;
-            background: rgba(0, 150, 220, 0.2);
-            backdrop-filter: blur(20px);
-            padding: 15px 45px;
+            right: 180px;
+            background: rgba(0, 140, 210, 0.2);
+            backdrop-filter: blur(25px);
+            padding: 14px 40px;
             border-radius: 70px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 500;
             z-index: 200;
             cursor: pointer;
-            box-shadow: 0 15px 30px -8px black;
+            box-shadow: 0 15px 30px -10px black;
             transition: 0.2s;
             letter-spacing: 1px;
         }
-        .telegram-premium:hover {
-            background: rgba(0, 170, 255, 0.3);
+        .telegram-top:hover {
+            background: rgba(0, 170, 250, 0.35);
             border-color: #ffd966;
-            transform: scale(1.02);
         }
 
-        /* ========== ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ ========== */
-        .glass-glow {
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            background: radial-gradient(circle, rgba(255,215,150,0.1) 0%, transparent 70%);
-            filter: blur(80px);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* ========== АДАПТАЦИЯ ========== */
+        /* Адаптация */
         @media (max-width: 1100px) {
-            .nav-arrow-premium { width: 100px; height: 100px; font-size: 65px; }
-            .title-premium h1 { font-size: 38px; }
-            .slide-area-premium { padding: 35px; }
+            .nav-arrow { width: 90px; height: 90px; font-size: 60px; }
+            .title-block h1 { font-size: 38px; }
+            .content-area { padding: 35px; }
         }
         @media (max-width: 800px) {
-            .nav-arrow-premium { width: 80px; height: 80px; font-size: 50px; }
-            .telegram-premium { font-size: 20px; padding: 12px 25px; right: 100px; }
-            h3 { font-size: 34px; }
+            .telegram-top { font-size: 20px; padding: 10px 25px; right: 120px; }
+            .slide-counter { padding: 8px 25px; font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="glass-glow"></div>
-    <div class="premium-glass">
+    <div class="glass-master">
 
         <!-- Верхняя панель -->
-        <div class="top-bar-premium">
-            <div class="title-premium">
-                <h2>премиум инструкция</h2>
+        <div class="top-panel">
+            <div class="title-block">
+                <h2>стеклянная инструкция</h2>
                 <h1>Платформа викторин</h1>
             </div>
-            <div class="counter-premium" id="counterPremium">1 / 9</div>
+            <div class="slide-counter" id="slideCounter">1 / 9</div>
         </div>
 
-        <!-- Область слайдов -->
-        <div class="slide-area-premium" id="slideAreaPremium">
-            <!-- Слайд 1: Введение -->
-            <div class="slide-premium active" id="slide1Premium">
-                <h3>✨ Добро пожаловать</h3>
-                <p>Эксклюзивная инструкция по работе с платформой "ИльяКласс". Полное руководство содержит все ссылки и детальное описание 6 шагов запуска викторины, основанное на официальном туториале.</p>
-                <div class="premium-grid">
-                    <div class="premium-grid-item"><strong>🎯 Цель</strong><span>Освоение полного цикла: от создания игры до таблицы лидеров</span></div>
-                    <div class="premium-grid-item"><strong>👥 Аудитория</strong><span>Педагоги, методисты, ведущие мастер-классов</span></div>
-                    <div class="premium-grid-item"><strong>⏱️ Время</strong><span>25-30 минут на изучение</span></div>
+        <!-- Область контента -->
+        <div class="content-area" id="contentArea">
+            <!-- СЛАЙД 1: Введение -->
+            <div class="slide active" id="slide1">
+                <h3>✨ О платформе</h3>
+                <p>Полное руководство по работе с образовательной платформой "ИльяКласс". Здесь собраны все ссылки, детальные инструкции и 6 шагов запуска викторины на основе официального туториала.</p>
+                <div class="info-grid">
+                    <div class="info-item"><strong>🎯 Цель</strong><span>Освоение полного цикла: создание, проведение, анализ викторин</span></div>
+                    <div class="info-item"><strong>👥 Аудитория</strong><span>Педагоги, ведущие мастер-классов, методисты</span></div>
+                    <div class="info-item"><strong>⏱️ Время</strong><span>25-30 минут на изучение</span></div>
                 </div>
             </div>
 
-            <!-- Слайд 2: Основная платформа -->
-            <div class="slide-premium" id="slide2Premium">
-                <h3>🔗 Главный портал</h3>
-                <div class="premium-card">
-                    <div class="link-title-premium">название</div>
-                    <div style="font-size:48px; font-weight:700; margin-bottom:20px;">ИльяКласс</div>
-                    <div class="link-title-premium">ссылка</div>
-                    <div class="link-url-premium">https://ilyasigma111.github.io/ilyaklass-demo</div>
-                    <div class="link-title-premium">описание</div>
-                    <p style="font-size:26px;">Центральный вход. Отсюда осуществляется навигация между всеми викторинами. Интерфейс позволяет переключаться между играми.</p>
+            <!-- СЛАЙД 2: Основная платформа -->
+            <div class="slide" id="slide2">
+                <h3>🔗 ИльяКласс</h3>
+                <div class="glass-card">
+                    <div style="font-size:42px; font-weight:700; margin-bottom:15px;">Главный портал</div>
+                    <div class="link-url">https://ilyasigma111.github.io/ilyaklass-demo</div>
+                    <p style="font-size:26px;">Центральная точка входа. Отсюда открываются все викторины, осуществляется навигация между ними.</p>
                 </div>
             </div>
 
-            <!-- Слайд 3: ПРЕДЛОЖКА -->
-            <div class="slide-premium" id="slide3Premium">
+            <!-- СЛАЙД 3: ПРЕДЛОЖКА -->
+            <div class="slide" id="slide3">
                 <h3>💡 ПРЕДЛОЖКА</h3>
-                <div class="premium-card">
-                    <div class="link-title-premium">форма идей</div>
-                    <div style="font-size:48px; font-weight:700; margin-bottom:20px;">ПРЕДЛОЖКА</div>
-                    <div class="link-title-premium">ссылка</div>
-                    <div class="link-url-premium">https://ilyasigma111.github.io/PredlozhkaSite</div>
-                    <div class="link-title-premium">назначение</div>
-                    <p style="font-size:26px;">Сбор тем для новых викторин и пожеланий по функционалу. Все идеи попадают в общий список.</p>
+                <div class="glass-card">
+                    <div style="font-size:42px; font-weight:700; margin-bottom:15px;">Форма идей</div>
+                    <div class="link-url">https://ilyasigma111.github.io/PredlozhkaSite</div>
+                    <p style="font-size:26px;">Отправка тем для новых викторин и пожеланий по функционалу. Все идеи попадают в общий список.</p>
                 </div>
             </div>
 
-            <!-- Слайд 4: Техническая структура -->
-            <div class="slide-premium" id="slide4Premium">
-                <h3>⚙️ Архитектура</h3>
-                <div class="premium-grid">
-                    <div class="premium-grid-item"><strong>📦 Репозитории</strong><span>Каждая викторина — отдельный GitHub-репозиторий</span></div>
-                    <div class="premium-grid-item"><strong>🌐 Хостинг</strong><span>GitHub Pages — статический, быстрый доступ</span></div>
-                    <div class="premium-grid-item"><strong>🔓 Доступ</strong><span>Открытый, без регистрации</span></div>
+            <!-- СЛАЙД 4: Техническая информация -->
+            <div class="slide" id="slide4">
+                <h3>⚙️ Структура</h3>
+                <div class="info-grid">
+                    <div class="info-item"><strong>📦 Репозитории</strong><span>Каждая викторина — отдельный GitHub-репозиторий</span></div>
+                    <div class="info-item"><strong>🌐 Хостинг</strong><span>GitHub Pages — статический, быстрый доступ</span></div>
+                    <div class="info-item"><strong>🔓 Доступ</strong><span>Открытый, без регистрации</span></div>
                 </div>
-                <div class="premium-card" style="margin-top:30px;">
+                <div class="glass-card">
                     <p style="font-size:28px;"><strong>Репозиторий:</strong> github.com/ilyasigma111</p>
                 </div>
             </div>
 
-            <!-- Слайд 5: 6 ШАГОВ ИЗ TUTORIAL (ПОДРОБНО) -->
-            <div class="slide-premium" id="slide5Premium">
-                <h3>🎮 6 шагов запуска игры</h3>
+            <!-- СЛАЙД 5: 6 ШАГОВ ИЗ TUTORIAL (ПОДРОБНО) -->
+            <div class="slide" id="slide5">
+                <h3>🎮 6 шагов запуска</h3>
                 
                 <h4>🔹 ШАГ 1. СОЗДАНИЕ ИГРЫ</h4>
-                <div class="step-description-premium">
-                    <strong>Действие учителя:</strong> Нажимает кнопку «СОЗДАТЬ». На экране появляется уникальный код игры (например, 12345678). В панели учителя отображается статус «👥 УЧЕНИКИ (0)» — ожидание подключения участников.
+                <div class="step-text">
+                    <strong>Учитель:</strong> нажимает «СОЗДАТЬ» → появляется код игры (например, 12345678). В панели учителя статус «👥 УЧЕНИКИ (0)» — ожидание подключения.
                 </div>
 
                 <h4>🔹 ШАГ 2. ПОДКЛЮЧЕНИЕ УЧЕНИКА</h4>
-                <div class="step-description-premium">
-                    <strong>Действие ученика:</strong> На своём устройстве (телефон/планшет) вводит имя (например, Анна) и код игры, затем нажимает «ПОДКЛЮЧИТЬСЯ». <br>
-                    <strong>Что видит учитель:</strong> В панели появляется запись «Анна — 0 очков», счётчик меняется на «👥 УЧЕНИКИ (1)».
+                <div class="step-text">
+                    <strong>Ученик:</strong> вводит имя (например, Анна) и код игры, нажимает «ПОДКЛЮЧИТЬСЯ».<br>
+                    <strong>Учитель видит:</strong> имя ученика и «0 очков», счётчик «👥 УЧЕНИКИ (1)».
                 </div>
 
                 <h4>🔹 ШАГ 3. ЗАПУСК ВОПРОСА</h4>
-                <div class="step-description-premium">
-                    <strong>Действие учителя:</strong> Нажимает кнопку «ВОПРОС».<br>
-                    <strong>Что видит ученик:</strong> На экране отображается вопрос (например, «Что такое фишинг?») и 4 варианта ответа.
+                <div class="step-text">
+                    <strong>Учитель:</strong> нажимает «ВОПРОС».<br>
+                    <strong>Ученик видит:</strong> вопрос (например, «Что такое фишинг?») и 4 варианта ответа.
                 </div>
 
                 <h4>🔹 ШАГ 4. ОТВЕТ УЧЕНИКА</h4>
-                <div class="step-description-premium">
-                    <strong>Действие ученика:</strong> Выбирает один из вариантов (например, «Кража данных»).<br>
-                    <strong>Что видит учитель:</strong> В панели появляется статистика: какие ученики ответили, какой вариант выбрали, статус (✅ — ответил, ⏳ — ожидание).
+                <div class="step-text">
+                    <strong>Ученик:</strong> выбирает вариант (например, «Кража данных»).<br>
+                    <strong>Учитель видит:</strong> статистику: кто ответил, какой вариант, статус (✅ — ответил, ⏳ — ожидание).
                 </div>
 
                 <h4>🔹 ШАГ 5. ПОКАЗ ПРАВИЛЬНОГО ОТВЕТА</h4>
-                <div class="step-description-premium">
-                    <strong>Действие учителя:</strong> Нажимает «ОТВЕТ».<br>
-                    <strong>Что видит ученик:</strong> Правильный ответ (например, «Кража данных») с пометкой +1 очко, а также краткое объяснение. Пример: «Фишинг — вид интернет-мошенничества для кражи данных».
+                <div class="step-text">
+                    <strong>Учитель:</strong> нажимает «ОТВЕТ».<br>
+                    <strong>Ученик видит:</strong> правильный ответ (+1 очко) и объяснение. Например: «Фишинг — мошенничество для кражи данных».
                 </div>
 
                 <h4>🔹 ШАГ 6. ТАБЛИЦА ЛИДЕРОВ</h4>
-                <div class="step-description-premium">
-                    <strong>После завершения всех вопросов:</strong> Отображается полная статистика: 
-                    <ul style="margin-left:40px; margin-top:15px; font-size:22px;">
-                        <li>Список учеников с итоговыми очками</li>
-                        <li>Таблица ответов по каждому вопросу (сколько ответили, сколько правильно)</li>
-                        <li>Кнопки «СКАЧАТЬ» (экспорт данных) и «СБРОСИТЬ» (новая игра)</li>
-                    </ul>
+                <div class="step-text">
+                    После всех вопросов — полная статистика: список учеников с очками, таблица ответов по каждому вопросу, кнопки «СКАЧАТЬ» и «СБРОСИТЬ».
                 </div>
-                <p style="margin-top:40px;">⚠️ Пример приведён для темы «кибербезопасность», но алгоритм работы одинаков для всех викторин.</p>
+                <p style="margin-top:30px;">⚠️ Пример для темы «кибербезопасность». Принцип одинаков для всех викторин.</p>
             </div>
 
-            <!-- Слайд 6: Визуализация шагов (панели) -->
-            <div class="slide-premium" id="slide6Premium">
+            <!-- СЛАЙД 6: Визуализация интерфейса -->
+            <div class="slide" id="slide6">
                 <h3>🖥️ Пример интерфейса</h3>
                 
-                <div class="glass-panel-row">
-                    <div class="glass-panel">
+                <div class="panel-row">
+                    <div class="panel">
                         <div class="panel-label">👨🏫 Панель учителя</div>
-                        <div class="glass-code">1234 5678</div>
+                        <div class="code-display">1234 5678</div>
                         <div class="student-row"><span>Анна</span><span>0 очков</span></div>
                         <div class="student-row"><span>Иван</span><span>0 очков</span></div>
-                        <p style="font-size:22px;">👥 УЧЕНИКИ (2) — ожидание</p>
+                        <p style="font-size:22px;">👥 УЧЕНИКИ (2)</p>
                     </div>
-                    <div class="glass-panel">
+                    <div class="panel">
                         <div class="panel-label">📱 Экран ученика</div>
-                        <div class="question-block">
+                        <div class="question-box">
                             <strong>ВОПРОС 1/30</strong><br>
                             Что такое фишинг?
                         </div>
                         <div class="options-grid">
-                            <div class="option-item">Вид рыбалки</div>
-                            <div class="option-item correct">Кража данных</div>
-                            <div class="option-item">Антивирус</div>
-                            <div class="option-item">Шифрование</div>
+                            <div class="option">Вид рыбалки</div>
+                            <div class="option correct">Кража данных</div>
+                            <div class="option">Антивирус</div>
+                            <div class="option">Шифрование</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-panel">
+                <div class="panel">
                     <div class="panel-label">📊 Статистика</div>
-                    <div class="stats-premium">
+                    <div class="stats-table">
                         <div class="stats-row"><span>Ученик</span><span>Ответ</span><span>Статус</span></div>
                         <div class="stats-row"><span>Анна</span><span>Кража данных</span><span>✅</span></div>
                         <div class="stats-row"><span>Иван</span><span>—</span><span>⏳</span></div>
@@ -654,100 +681,94 @@
                 </div>
             </div>
 
-            <!-- Слайд 7: Практические задания -->
-            <div class="slide-premium" id="slide7Premium">
-                <h3>📋 Задания для участников</h3>
-                <ul class="step-list-premium">
-                    <li><span class="step-number-premium">1</span>Открыть основную платформу (слайд 2)</li>
-                    <li><span class="step-number-premium">2</span>Изучить навигацию между викторинами</li>
-                    <li><span class="step-number-premium">3</span>Перейти в ПРЕДЛОЖКУ (слайд 3)</li>
-                    <li><span class="step-number-premium">4</span>Отправить тему для новой викторины</li>
-                    <li><span class="step-number-premium">5</span>Ознакомиться с 6 шагами (слайд 5)</li>
+            <!-- СЛАЙД 7: Практические задания -->
+            <div class="slide" id="slide7">
+                <h3>📋 Задания</h3>
+                <ul class="step-list">
+                    <li><span class="step-num">1</span>Открыть основную платформу (слайд 2)</li>
+                    <li><span class="step-num">2</span>Изучить навигацию между викторинами</li>
+                    <li><span class="step-num">3</span>Перейти в ПРЕДЛОЖКУ (слайд 3)</li>
+                    <li><span class="step-num">4</span>Отправить тему для новой викторины</li>
+                    <li><span class="step-num">5</span>Разобрать 6 шагов (слайд 5)</li>
                 </ul>
             </div>
 
-            <!-- Слайд 8: Контакты -->
-            <div class="slide-premium" id="slide8Premium">
-                <h3>📬 Контактная информация</h3>
-                <div class="premium-card" style="text-align:center;">
-                    <p style="font-size:38px; margin-bottom:30px;">🌐 GitHub</p>
-                    <div class="link-url-premium" style="font-size:32px;">github.com/ilyasigma111</div>
-                    <p style="font-size:38px; margin:50px 0 20px;">✈️ Telegram</p>
-                    <div class="link-url-premium" style="font-size:32px; background:rgba(0,150,200,0.2);">@ilyagulkov</div>
+            <!-- СЛАЙД 8: Контакты и кнопка -->
+            <div class="slide" id="slide8">
+                <h3>📬 Контакты</h3>
+                <div class="glass-card" style="text-align:center;">
+                    <p style="font-size:36px; margin-bottom:20px;">🌐 GitHub</p>
+                    <div class="link-url" style="font-size:32px;">github.com/ilyasigma111</div>
+                    <p style="font-size:36px; margin:40px 0 20px;">✈️ Telegram</p>
+                    <div class="link-url" style="font-size:32px; background:rgba(0,150,200,0.2);">@ilyagulkov</div>
                 </div>
             </div>
 
-            <!-- Слайд 9: Завершение -->
-            <div class="slide-premium" id="slide9Premium">
-                <h3>✅ Инструкция завершена</h3>
-                <div class="premium-card">
-                    <p style="font-size:32px;">Все ссылки и описания собраны в этом файле.</p>
-                    <p style="font-size:28px; margin-top:40px;">Используйте стрелки внизу для навигации.</p>
+            <!-- СЛАЙД 9: Завершение и большая кнопка -->
+            <div class="slide" id="slide9">
+                <h3>✅ Перейти к викторинам</h3>
+                <div class="glass-card" style="display: flex; flex-direction: column; align-items: center;">
+                    <p style="font-size:32px;">Нажмите кнопку ниже, чтобы открыть платформу</p>
+                    <a href="https://ilyasigma111.github.io/ilyaklass-demo" target="_blank" class="big-redirect-button">
+                        🚀 ИльяКласс
+                    </a>
+                    <p style="font-size:26px; margin-top:40px;">Инструкция всегда под рукой</p>
                 </div>
             </div>
         </div>
 
         <!-- СТРЕЛКИ В НИЖНИХ УГЛАХ -->
-        <div class="nav-corner-left" id="prevBtnPremium" onclick="changeSlidePremium(-1)">
-            <div class="nav-arrow-premium">←</div>
+        <div class="arrow-left" id="prevBtn" onclick="changeSlide(-1)">
+            <div class="nav-arrow">←</div>
         </div>
-        <div class="nav-corner-right" id="nextBtnPremium" onclick="changeSlidePremium(1)">
-            <div class="nav-arrow-premium">→</div>
+        <div class="arrow-right" id="nextBtn" onclick="changeSlide(1)">
+            <div class="nav-arrow">→</div>
         </div>
 
-        <!-- Telegram контакт -->
-        <div class="telegram-premium" onclick="window.open('https://t.me/ilyagulkov', '_blank')">@ilyagulkov</div>
+        <!-- Telegram сверху (не перекрывает номер слайда) -->
+        <div class="telegram-top" onclick="window.open('https://t.me/ilyagulkov', '_blank')">
+            @ilyagulkov
+        </div>
     </div>
 
     <script>
-        let currentSlidePremium = 1;
-        const totalSlidesPremium = 9;
-        const counterPremium = document.getElementById('counterPremium');
-        const prevPremium = document.getElementById('prevBtnPremium');
-        const nextPremium = document.getElementById('nextBtnPremium');
+        let current = 1;
+        const total = 9;
+        const counter = document.getElementById('slideCounter');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
 
-        function updateSlidesPremium() {
-            // Скрыть все слайды
-            for (let i = 1; i <= totalSlidesPremium; i++) {
-                const slide = document.getElementById(`slide${i}Premium`);
+        function updateSlides() {
+            for (let i = 1; i <= total; i++) {
+                const slide = document.getElementById(`slide${i}`);
                 if (slide) slide.classList.remove('active');
             }
-            // Показать текущий
-            const activeSlide = document.getElementById(`slide${currentSlidePremium}Premium`);
-            if (activeSlide) activeSlide.classList.add('active');
+            const active = document.getElementById(`slide${current}`);
+            if (active) active.classList.add('active');
             
-            // Обновить счетчик
-            counterPremium.innerText = `${currentSlidePremium} / ${totalSlidesPremium}`;
+            counter.innerText = `${current} / ${total}`;
             
-            // Блокировка стрелок
-            if (currentSlidePremium === 1) {
-                prevPremium.classList.add('disabled');
-            } else {
-                prevPremium.classList.remove('disabled');
-            }
-            if (currentSlidePremium === totalSlidesPremium) {
-                nextPremium.classList.add('disabled');
-            } else {
-                nextPremium.classList.remove('disabled');
+            if (current === 1) prev.classList.add('disabled');
+            else prev.classList.remove('disabled');
+            
+            if (current === total) next.classList.add('disabled');
+            else next.classList.remove('disabled');
+        }
+
+        function changeSlide(direction) {
+            const newSlide = current + direction;
+            if (newSlide >= 1 && newSlide <= total) {
+                current = newSlide;
+                updateSlides();
             }
         }
 
-        function changeSlidePremium(direction) {
-            const newSlide = currentSlidePremium + direction;
-            if (newSlide >= 1 && newSlide <= totalSlidesPremium) {
-                currentSlidePremium = newSlide;
-                updateSlidesPremium();
-            }
-        }
-
-        // Клавиатура
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') changeSlidePremium(-1);
-            if (e.key === 'ArrowRight') changeSlidePremium(1);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
         });
 
-        // Инициализация
-        updateSlidesPremium();
+        updateSlides();
     </script>
 </body>
 </html>
