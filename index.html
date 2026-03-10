@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Инструкция: платформа викторин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИльяКласс | Инструкция</title>
     <style>
         * {
             margin: 0;
@@ -14,28 +14,28 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #1a2639 0%, #2a3b4c 100%);
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 100 M100 0 L0 100" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></svg>'), linear-gradient(145deg, #0b1c2f 0%, #1d3b5c 100%);
+            background-size: cover, auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 0;
+            position: relative;
         }
 
+        /* Полностью растянутый контейнер на весь экран */
         .presentation-container {
-            width: 100%;
-            max-width: 1300px;
-            height: 850px;
-            max-height: 92vh;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
-            padding: 28px;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(17, 25, 40, 0.65);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: none;
+            padding: 28px 32px;
             display: flex;
             flex-direction: column;
             position: relative;
+            box-shadow: none;
         }
 
         /* Верхняя панель */
@@ -43,157 +43,171 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 10px 20px 10px;
+            padding: 0 20px 20px 20px;
             color: white;
         }
 
         .title-section h2 {
             font-weight: 400;
             font-size: 18px;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            letter-spacing: 3px;
+            opacity: 0.7;
             text-transform: uppercase;
-            color: #b9d9ff;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .title-section h1 {
             font-weight: 700;
-            font-size: 34px;
+            font-size: 40px;
             margin-top: 5px;
             color: white;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.5px;
         }
 
         .slide-counter {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
-            padding: 14px 30px;
+            padding: 12px 32px;
             border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 500;
             font-size: 22px;
             color: white;
             letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Область слайда */
+        /* Область слайда - растянута */
         .slide-area {
             flex: 1;
-            background: rgba(10, 20, 30, 0.6);
+            background: rgba(10, 20, 35, 0.45);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 40px;
+            border-radius: 48px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 45px;
-            margin-bottom: 20px;
+            padding: 45px 55px;
+            margin: 0 20px 20px 20px;
             overflow-y: auto;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1), 0 15px 35px -15px black;
-            color: #f0f4fa;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            color: #f0f8ff;
             scrollbar-width: thin;
-            scrollbar-color: #4a6c8f #1e2e3e;
+            scrollbar-color: rgba(255, 215, 120, 0.5) rgba(255, 255, 255, 0.05);
         }
 
         .slide-area::-webkit-scrollbar {
             width: 10px;
         }
         .slide-area::-webkit-scrollbar-track {
-            background: #1e2e3e;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
         .slide-area::-webkit-scrollbar-thumb {
-            background: #4a6c8f;
+            background: rgba(255, 215, 120, 0.4);
             border-radius: 10px;
-            border: 2px solid #1e2e3e;
+            border: 2px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Контент слайдов */
         .slide-content {
             display: none;
-            animation: fadeSlide 0.35s ease;
+            animation: glassFade 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
         .slide-content.active {
             display: block;
         }
-        @keyframes fadeSlide {
-            from { opacity: 0.3; transform: translateX(8px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes glassFade {
+            from { opacity: 0.3; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Типографика */
         h3 {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             border-left: 8px solid #ffb347;
-            padding-left: 25px;
+            padding-left: 28px;
             color: white;
-            text-shadow: 0 2px 5px black;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            letter-spacing: -0.3px;
         }
         h4 {
-            font-size: 26px;
-            margin: 30px 0 15px 0;
+            font-size: 28px;
+            margin: 40px 0 20px 0;
             color: #ffe5b4;
             font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
         p {
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1.6;
             margin-bottom: 25px;
-            color: #e0e8f0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 350;
         }
 
-        /* Карточки ссылок */
+        /* Карточки ссылок - стекло */
         .link-card {
-            background: rgba(0, 20, 40, 0.7);
-            border-radius: 30px;
-            padding: 30px 35px;
-            margin: 30px 0;
-            border: 1px solid #3a5f7a;
-            box-shadow: 0 15px 30px -10px black;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 42px;
+            padding: 35px 40px;
+            margin: 35px 0;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
         .link-title {
             font-size: 18px;
             text-transform: uppercase;
-            color: #9bb8da;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            color: rgba(255, 215, 150, 0.9);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
         }
         .link-url {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             word-break: break-all;
-            background: #0a1a2a;
-            padding: 15px 25px;
-            border-radius: 20px;
-            margin: 15px 0;
-            border: 1px solid #2c5f8a;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 18px 28px;
+            border-radius: 28px;
+            margin: 18px 0;
+            border: 1px solid rgba(255, 200, 100, 0.4);
             color: #b0e0ff;
             font-family: monospace;
+            backdrop-filter: blur(4px);
         }
         .link-desc {
-            font-size: 22px;
-            color: #d4e4fc;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         /* Сетка информации */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-            margin: 35px 0;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin: 40px 0;
         }
         .info-item {
-            background: rgba(15, 30, 45, 0.8);
-            padding: 25px;
-            border-radius: 25px;
-            border: 1px solid #2d6073;
-            font-size: 18px;
-            color: #d1e3f0;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 28px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 20px;
+            color: #e6f0ff;
+            box-shadow: 0 15px 30px -12px black;
+            transition: 0.2s;
+        }
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 200, 100, 0.5);
         }
         .info-item strong {
             display: block;
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 15px;
             color: #ffcc80;
         }
@@ -203,168 +217,206 @@
             list-style: none;
         }
         .step-list li {
-            font-size: 22px;
-            margin-bottom: 25px;
+            font-size: 24px;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
-            gap: 25px;
-            background: rgba(25, 45, 60, 0.7);
-            padding: 20px 30px;
-            border-radius: 50px;
-            border: 1px solid #3d748c;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            padding: 22px 35px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .step-number {
-            background: #ffaa33;
-            color: #1a2a3a;
-            width: 55px;
-            height: 55px;
+            background: linear-gradient(145deg, #ffb347, #ff8c1a);
+            color: #0a1a2a;
+            width: 65px;
+            height: 65px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
             font-weight: 800;
-            font-size: 28px;
-            box-shadow: 0 8px 0 #b25c00;
-            border: 2px solid #ffd966;
+            font-size: 32px;
+            box-shadow: 0 10px 0 #b25c00, 0 8px 20px rgba(255, 140, 0, 0.5);
+            border: 2px solid #ffdb9f;
         }
 
-        /* Стили для инструкции (панели учителя/ученика) */
+        /* Стили для инструкции - стеклянные панели */
         .tutorial-block {
             display: flex;
-            gap: 30px;
-            margin: 35px 0;
+            gap: 40px;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
         .teacher-panel, .student-panel {
-            flex: 1 1 280px;
-            background: #0e2635;
-            border-radius: 28px;
-            padding: 25px;
-            border: 2px solid #2f6e9e;
-            box-shadow: 0 10px 0 #0a1a24;
+            flex: 1 1 300px;
+            background: rgba(10, 30, 45, 0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 25px 40px -15px black;
         }
         .panel-title {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
-            background: #1d4e6f;
+            background: rgba(255, 215, 120, 0.15);
             display: inline-block;
-            padding: 8px 25px;
-            border-radius: 40px;
-            margin-bottom: 20px;
-            color: white;
-            border: 1px solid #66b5ff;
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            color: #ffdb9f;
+            border: 1px solid rgba(255, 215, 120, 0.4);
+            backdrop-filter: blur(4px);
         }
         .code-display {
-            background: #05161f;
-            padding: 15px 20px;
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px 25px;
+            border-radius: 28px;
             font-family: monospace;
-            font-size: 32px;
+            font-size: 38px;
             font-weight: bold;
-            letter-spacing: 8px;
+            letter-spacing: 10px;
             text-align: center;
-            color: #f4e542;
-            border: 2px dashed #e6b800;
-            margin: 15px 0;
+            color: #ffe066;
+            border: 2px dashed #ffb347;
+            margin: 20px 0;
+            backdrop-filter: blur(4px);
         }
         .student-item {
             display: flex;
             justify-content: space-between;
-            background: #123d4f;
-            padding: 12px 18px;
-            border-radius: 40px;
-            margin: 10px 0;
-            border: 1px solid #3c9bd9;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin: 12px 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 22px;
         }
         .quiz-question {
-            background: #0f3445;
-            padding: 20px;
-            border-radius: 24px;
-            border: 2px solid #1f8cad;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 200, 100, 0.4);
+            font-size: 24px;
         }
         .quiz-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 18px;
+            margin: 25px 0;
         }
         .quiz-option {
-            background: #1b526b;
-            padding: 16px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 18px;
+            border-radius: 40px;
             text-align: center;
-            font-size: 20px;
-            border: 1px solid #57b1df;
+            font-size: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
         }
         .quiz-option.correct {
-            background: #146b3a;
+            background: rgba(50, 150, 80, 0.5);
             border-color: #9bff9b;
+            box-shadow: 0 0 20px rgba(100, 255, 100, 0.3);
         }
         .stats-table {
-            background: #0b202b;
-            padding: 15px;
-            border-radius: 20px;
-            font-family: monospace;
-            font-size: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 30px;
+            font-size: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .stats-table div {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            padding: 10px;
-            border-bottom: 1px solid #2b5777;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Навигация - стрелки по углам */
+        /* Стрелки по углам - настоящие углы */
         .nav-left, .nav-right {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 20;
+            z-index: 30;
         }
         .nav-left {
-            left: 5px;
+            left: 15px;
         }
         .nav-right {
-            right: 5px;
+            right: 15px;
         }
         .nav-btn {
-            background: rgba(20, 40, 60, 0.7);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
             color: white;
-            width: 85px;
-            height: 85px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            font-size: 50px;
+            font-size: 55px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.2);
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 215, 0, 0.2);
             user-select: none;
         }
         .nav-btn:hover {
-            background: #2b5e82;
-            transform: scale(1.08);
-            border-color: #ffd966;
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+            border-color: #ffdb9f;
+            box-shadow: 0 25px 45px -5px black;
         }
         .nav-btn.disabled {
             opacity: 0.2;
             pointer-events: none;
-            border-color: #555;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Telegram контакт */
+        .telegram-contact {
+            position: absolute;
+            bottom: 25px;
+            right: 40px;
+            background: rgba(0, 150, 200, 0.25);
+            backdrop-filter: blur(15px);
+            padding: 15px 35px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .telegram-contact::before {
+            content: "✈️";
+            font-size: 28px;
+            filter: drop-shadow(0 2px 5px black);
         }
 
         /* Адаптация */
-        @media (max-width: 900px) {
-            .presentation-container { padding: 15px; }
-            .slide-area { padding: 25px; }
-            h3 { font-size: 28px; }
-            .nav-btn { width: 60px; height: 60px; font-size: 40px; }
+        @media (max-width: 1000px) {
+            .presentation-container { padding: 20px; }
+            .slide-area { padding: 30px; }
+            h3 { font-size: 32px; }
+            .nav-btn { width: 70px; height: 70px; font-size: 45px; }
+            .telegram-contact { font-size: 20px; padding: 12px 25px; }
         }
-        @media (max-width: 600px) {
-            .title-section h1 { font-size: 26px; }
-            .link-url { font-size: 20px; }
+        @media (max-width: 700px) {
+            .title-section h1 { font-size: 32px; }
+            .link-url { font-size: 24px; }
+            .nav-left { left: 5px; }
+            .nav-right { right: 5px; }
         }
     </style>
 </head>
@@ -373,7 +425,7 @@
         <!-- Верхняя панель -->
         <div class="top-bar">
             <div class="title-section">
-                <h2>пошаговая инструкция</h2>
+                <h2>инструкция • glassmorphism</h2>
                 <h1>Платформа викторин</h1>
             </div>
             <div class="slide-counter" id="slideCounter">1 / 7</div>
@@ -384,13 +436,13 @@
             <!-- Слайд 1: О платформе -->
             <div class="slide-content active" id="slide1">
                 <h3>О платформе</h3>
-                <p>Данная инструкция подробно описывает работу с образовательной платформой "ИльяКласс". Вы узнаете, как создавать игры, подключать учеников, проводить викторины и отслеживать результаты.</p>
+                <p>Полное руководство по работе с образовательной платформой "ИльяКласс". Содержит все ссылки и пошаговые инструкции для проведения викторин.</p>
                 <div class="info-grid">
-                    <div class="info-item"><strong>🎯 Цель</strong>Освоение полного цикла: от создания игры до подведения итогов</div>
+                    <div class="info-item"><strong>🎯 Цель</strong>Освоение полного цикла: создание игры, подключение, проведение, статистика</div>
                     <div class="info-item"><strong>👥 Аудитория</strong>Педагоги, ведущие мастер-классов, организаторы</div>
-                    <div class="info-item"><strong>⏱️ Время изучения</strong>20-25 минут</div>
+                    <div class="info-item"><strong>⏱️ Время</strong>20-25 минут</div>
                 </div>
-                <p>Всего <strong>7 слайдов</strong>. Используйте стрелки по краям экрана для навигации.</p>
+                <p><strong>7 слайдов</strong> с подробным описанием. Стрелки по краям экрана для навигации.</p>
             </div>
 
             <!-- Слайд 2: Основная платформа -->
@@ -398,27 +450,25 @@
                 <h3>📌 Основная платформа</h3>
                 <div class="link-card">
                     <div class="link-title">название</div>
-                    <div style="font-size:38px; font-weight:700; margin-bottom:20px;">ИльяКласс (демо)</div>
+                    <div style="font-size:42px; font-weight:700; margin-bottom:20px;">ИльяКласс (демо)</div>
                     <div class="link-title">ссылка</div>
                     <div class="link-url">https://ilyasigma111.github.io/ilyaklass-demo</div>
                     <div class="link-title">описание</div>
-                    <div class="link-desc">Главный портал со всеми викторинами. Отсюда начинается работа.</div>
+                    <div class="link-desc">Главный портал со всеми викторинами. Точка входа в систему.</div>
                 </div>
-                <p>🔹 <strong>Важно:</strong> интерфейс позволяет переключаться между разными викторинами.</p>
             </div>
 
-            <!-- Слайд 3: Система предложений -->
+            <!-- Слайд 3: ПРЕДЛОЖКА -->
             <div class="slide-content" id="slide3">
                 <h3>💡 ПРЕДЛОЖКА</h3>
                 <div class="link-card">
-                    <div class="link-title">форма сбора идей</div>
-                    <div style="font-size:38px; font-weight:700; margin-bottom:20px;">ПРЕДЛОЖКА</div>
+                    <div class="link-title">форма обратной связи</div>
+                    <div style="font-size:42px; font-weight:700; margin-bottom:20px;">ПРЕДЛОЖКА</div>
                     <div class="link-title">ссылка</div>
                     <div class="link-url">https://ilyasigma111.github.io/PredlozhkaSite</div>
                     <div class="link-title">назначение</div>
-                    <div class="link-desc">Отправка тем для новых викторин и запросов на доработку функционала.</div>
+                    <div class="link-desc">Отправка идей для новых викторин и предложений по функционалу.</div>
                 </div>
-                <p>📨 Все идеи попадают в общий список и учитываются при разработке.</p>
             </div>
 
             <!-- Слайд 4: Техническая информация -->
@@ -426,25 +476,25 @@
                 <h3>⚙️ Технические детали</h3>
                 <div class="info-grid">
                     <div class="info-item"><strong>Структура</strong>Каждая викторина — отдельный репозиторий GitHub</div>
-                    <div class="info-item"><strong>Хостинг</strong>GitHub Pages (статический)</div>
+                    <div class="info-item"><strong>Хостинг</strong>GitHub Pages</div>
                     <div class="info-item"><strong>Доступ</strong>Открытый, без регистрации</div>
                 </div>
-                <div style="background:#102433; border-radius:30px; padding:25px; margin-top:25px;">
-                    <p><strong>Репозиторий:</strong> github.com/ilyasigma111</p>
+                <div style="background:rgba(255,255,255,0.03); border-radius:40px; padding:25px; margin-top:30px; border:1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size:24px;"><strong>Репозиторий:</strong> github.com/ilyasigma111</p>
                 </div>
             </div>
 
-            <!-- Слайд 5: ПОДРОБНАЯ ИНСТРУКЦИЯ ПО ЗАПУСКУ (6 шагов) -->
+            <!-- Слайд 5: ПОЛНАЯ ИНСТРУКЦИЯ (6 шагов) -->
             <div class="slide-content" id="slide5">
                 <h3>🎮 ЗАПУСК ИГРЫ: 6 ШАГОВ</h3>
                 
-                <h4>ШАГ 1: СОЗДАНИЕ ИГРЫ (учитель)</h4>
+                <h4>ШАГ 1: СОЗДАНИЕ ИГРЫ</h4>
                 <div class="tutorial-block">
                     <div class="teacher-panel">
                         <div class="panel-title">👨🏫 Панель учителя</div>
-                        <p>Нажмите кнопку <strong>«СОЗДАТЬ»</strong>. Появится код игры, например:</p>
+                        <p>Нажмите <strong>«СОЗДАТЬ»</strong> → появится код игры:</p>
                         <div class="code-display">1234 5678</div>
-                        <p>В панели отобразится: <strong>👥 УЧЕНИКИ (0)</strong> — ожидание подключения.</p>
+                        <p><strong>👥 УЧЕНИКИ (0)</strong> — ожидание подключения.</p>
                     </div>
                 </div>
 
@@ -452,32 +502,24 @@
                 <div class="tutorial-block">
                     <div class="student-panel">
                         <div class="panel-title">📱 Экран ученика</div>
-                        <p>Ученик вводит:</p>
-                        <ul style="margin-left:25px; font-size:20px;">
-                            <li><strong>Имя</strong> (например, Анна)</li>
-                            <li><strong>Код игры</strong> (например, 12345678)</li>
-                        </ul>
-                        <p>→ нажимает <strong>«ПОДКЛЮЧИТЬСЯ»</strong></p>
+                        <p>Ученик вводит <strong>Имя</strong> и <strong>Код игры</strong>, затем «ПОДКЛЮЧИТЬСЯ».</p>
                     </div>
                     <div class="teacher-panel">
                         <div class="panel-title">👨🏫 Панель учителя</div>
                         <div class="student-item"><span>Анна</span> <span>0 очков</span></div>
-                        <p><strong>👥 УЧЕНИКИ (1)</strong> — имя появилось в списке.</p>
+                        <p><strong>👥 УЧЕНИКИ (1)</strong></p>
                     </div>
                 </div>
 
                 <h4>ШАГ 3: ЗАПУСК ВОПРОСА</h4>
                 <div class="tutorial-block">
                     <div class="teacher-panel">
-                        <div class="panel-title">👨🏫 Действие учителя</div>
-                        <p>Нажимает кнопку <strong>«ВОПРОС»</strong>.</p>
+                        <div class="panel-title">👨🏫 Учитель</div>
+                        <p>Нажимает <strong>«ВОПРОС»</strong>.</p>
                     </div>
                     <div class="student-panel">
                         <div class="panel-title">📱 Анна | 0 очков</div>
-                        <div class="quiz-question">
-                            <strong>ВОПРОС 1/30</strong><br>
-                            Что такое фишинг?
-                        </div>
+                        <div class="quiz-question"><strong>ВОПРОС 1/30:</strong> Что такое фишинг?</div>
                         <div class="quiz-options">
                             <div class="quiz-option">Вид рыбалки</div>
                             <div class="quiz-option">Кража данных</div>
@@ -490,14 +532,14 @@
                 <h4>ШАГ 4: ОТВЕТ УЧЕНИКА</h4>
                 <div class="tutorial-block">
                     <div class="student-panel">
-                        <div class="panel-title">📱 Анна выбрала</div>
+                        <div class="panel-title">📱 Анна</div>
                         <div class="quiz-options">
                             <div class="quiz-option">Вид рыбалки</div>
                             <div class="quiz-option correct">✓ Кража данных</div>
                             <div class="quiz-option">Антивирус</div>
                             <div class="quiz-option">Шифрование</div>
                         </div>
-                        <p>⏳ Статус: <strong>Ожидание...</strong></p>
+                        <p>⏳ Ожидание...</p>
                     </div>
                     <div class="teacher-panel">
                         <div class="panel-title">👨🏫 Статистика</div>
@@ -505,7 +547,6 @@
                             <div><span>Ученик</span><span>Ответ</span><span>Статус</span></div>
                             <div><span>Анна</span><span>Кража данных</span><span>✅</span></div>
                             <div><span>Иван</span><span>—</span><span>⏳</span></div>
-                            <div><span>Мария</span><span>Вид рыбалки</span><span>✅</span></div>
                         </div>
                     </div>
                 </div>
@@ -520,70 +561,68 @@
                         <div class="panel-title">📱 Анна | +1 очко</div>
                         <div class="quiz-question">
                             <p style="color:#9bff9b;">✓ Правильно: Кража данных</p>
-                            <p style="font-size:18px;">Объяснение: Фишинг — вид интернет-мошенничества для кражи данных.</p>
+                            <p style="font-size:20px;">Фишинг — мошенничество для кражи данных.</p>
                         </div>
                     </div>
                 </div>
 
-                <h4>ШАГ 6: ТАБЛИЦА ЛИДЕРОВ (после всех вопросов)</h4>
+                <h4>ШАГ 6: ТАБЛИЦА ЛИДЕРОВ</h4>
                 <div class="teacher-panel" style="max-width:100%;">
-                    <div class="panel-title">👨🏫 ПОЛНАЯ ПАНЕЛЬ УЧИТЕЛЯ</div>
-                    <div style="display:flex; gap:30px; flex-wrap:wrap;">
+                    <div class="panel-title">👨🏫 ПОЛНАЯ ПАНЕЛЬ</div>
+                    <div style="display:flex; gap:40px; flex-wrap:wrap;">
                         <div style="flex:2;">
                             <p><strong>👥 УЧЕНИКИ (4)</strong></p>
                             <div class="student-item"><span>Мария</span><span>15 очков</span></div>
                             <div class="student-item"><span>Анна</span><span>12 очков</span></div>
                             <div class="student-item"><span>Иван</span><span>8 очков</span></div>
-                            <div class="student-item"><span>Пётр</span><span>5 очков</span></div>
                         </div>
                         <div style="flex:3;">
-                            <p><strong>Статистика по вопросам</strong></p>
+                            <p><strong>Статистика</strong></p>
                             <div class="stats-table">
                                 <div><span>Вопрос</span><span>Ответили</span><span>Правильно</span></div>
                                 <div><span>1</span><span>4/4</span><span>3</span></div>
                                 <div><span>2</span><span>4/4</span><span>4</span></div>
-                                <div><span>3</span><span>3/4</span><span>2</span></div>
-                                <div><span>...</span><span>...</span><span>...</span></div>
                             </div>
                         </div>
                     </div>
-                    <div style="margin-top:25px; display:flex; gap:20px;">
-                        <span style="background:#1a5978; padding:12px 30px; border-radius:40px;">📥 СКАЧАТЬ</span>
-                        <span style="background:#8b3d3d; padding:12px 30px; border-radius:40px;">🔄 СБРОСИТЬ</span>
-                    </div>
                 </div>
-                <p style="margin-top:30px;">⚠️ Это пример викторины по кибербезопасности. Принцип работы одинаков для всех тем.</p>
+                <p style="margin-top:30px;">⚠️ Пример викторины по кибербезопасности. Принцип одинаков для всех тем.</p>
             </div>
 
-            <!-- Слайд 6: Практическая часть (задания) -->
+            <!-- Слайд 6: Практическая часть -->
             <div class="slide-content" id="slide6">
                 <h3>📋 Практические задания</h3>
                 <ul class="step-list">
                     <li><span class="step-number">1</span> Откройте основную платформу (слайд 2)</li>
-                    <li><span class="step-number">2</span> Изучите навигацию и интерфейс</li>
-                    <li><span class="step-number">3</span> Перейдите в форму ПРЕДЛОЖКА (слайд 3)</li>
-                    <li><span class="step-number">4</span> Отправьте тему для будущей викторины</li>
-                    <li><span class="step-number">5</span> Ознакомьтесь с 6-шаговой инструкцией (слайд 5)</li>
+                    <li><span class="step-number">2</span> Изучите навигацию</li>
+                    <li><span class="step-number">3</span> Перейдите в ПРЕДЛОЖКУ (слайд 3)</li>
+                    <li><span class="step-number">4</span> Отправьте тему для викторины</li>
+                    <li><span class="step-number">5</span> Разберите 6 шагов запуска (слайд 5)</li>
                 </ul>
             </div>
 
-            <!-- Слайд 7: Контакты и завершение -->
+            <!-- Слайд 7: Контакты -->
             <div class="slide-content" id="slide7">
-                <h3>📞 Завершение</h3>
+                <h3>📞 Контакты и завершение</h3>
                 <div class="link-card" style="text-align:center;">
-                    <p style="font-size:26px;">Все ссылки собраны в этой инструкции.</p>
-                    <p style="font-size:22px; margin:30px 0;">Репозиторий проекта:<br> <strong style="font-size:28px;">github.com/ilyasigma111</strong></p>
-                    <p style="font-size:22px;">Инструкция создана для мастер-класса.</p>
+                    <p style="font-size:28px;">Все материалы собраны в этой инструкции.</p>
+                    <p style="font-size:24px; margin:35px 0;">GitHub: <strong>github.com/ilyasigma111</strong></p>
+                    <p style="font-size:24px;">По вопросам: <strong>@ilyagulkov</strong> (Telegram)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Навигационные стрелки по углам -->
+        <!-- Стрелки по углам -->
         <div class="nav-left" id="prevBtn" onclick="changeSlide(-1)">
             <div class="nav-btn">←</div>
         </div>
         <div class="nav-right" id="nextBtn" onclick="changeSlide(1)">
             <div class="nav-btn">→</div>
+        </div>
+
+        <!-- Telegram контакт на видном месте -->
+        <div class="telegram-contact" onclick="window.open('https://t.me/ilyagulkov', '_blank')" style="cursor: pointer;">
+            @ilyagulkov
         </div>
     </div>
 
@@ -604,7 +643,6 @@
 
             slideCounter.textContent = `${currentSlide} / ${totalSlides}`;
 
-            // Блокировка кнопок на границах
             if (currentSlide === 1) {
                 prevBtn.classList.add('disabled');
             } else {
@@ -625,7 +663,6 @@
             }
         }
 
-        // Клавиатура
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') changeSlide(-1);
             if (e.key === 'ArrowRight') changeSlide(1);
